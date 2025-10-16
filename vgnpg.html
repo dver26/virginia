@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💛 Nuestro rinconcito 💛</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #fff8d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screen {
+      position: absolute;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      text-align: center;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      z-index: 0;
+      pointer-events: none; /* no bloquea clics */
+    }
+
+    .screen.active {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 10;
+      pointer-events: all; /* solo la activa recibe clics */
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      background-color: #f8e473;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ffe45e;
+    }
+
+    /* Botón final discreto */
+    .download-btn {
+      display: inline-block;
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #555;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .download-btn:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="screen active">
+    <h1>He hecho esta página para poder tener nuestro rinconcito de internet con el recuerdo de este día</h1>
+    <button class="btn">Continuar</button>
+  </div>
+
+  <div class="screen"><h1>Hoy es un día importante para los dos</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>Llevamos tiempo queriendo hacerlo oficial</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>No quiero esperar mucho más</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>¿Estás preparada seguro?</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>Bueno, los dos llevamos tiempo queriendo que llegase esta pregunta</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>Ahí va</h1><button class="btn">Continuar</button></div>
+  <div class="screen"><h1>Uy</h1><button class="btn">Continuar</button></div>
+
+  <div class="screen" id="mirame">
+    <h1>Mírame un segundo que pasa algo...</h1>
+  </div>
+
+  <div class="screen" id="final">
+    <h1>¿Quieres ser mi novia? 💛</h1>
+    <a class="download-btn" href="CartaVirginia.pdf" download>Carta 💌</a>
+  </div>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    let current = 0;
+
+    const nextScreen = () => {
+      if (current < screens.length - 1) {
+        screens[current].classList.remove('active');
+        current++;
+        screens[current].classList.add('active');
+
+        // Si llegamos a la pantalla "mirame", esperar 5 segundos antes de continuar
+        if (screens[current].id === 'mirame') {
+          setTimeout(() => {
+            screens[current].classList.remove('active');
+            current++;
+            screens[current].classList.add('active');
+          }, 5000);
+        }
+      }
+    };
+
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', nextScreen);
+    });
+  </script>
+</body>
+</html>
